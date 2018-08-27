@@ -1,3 +1,19 @@
+Private Branch of ZPaq. 
+Forked from https://GitHub.com/zpaq/zpaq
+
+Two major changes:
+
+1. Adds a check for "Password" in ZPaq.cpp. 
+    This allows zpaq.exe to be used as a Self Extraciting Executable.
+    The existing Self Extracting Executeable does not allow for some compression types.
+
+2. Removes LibDivSUFSort.c content from the libaray, 
+    so the resulting code can be used without the GPL. 
+
+Keith Garner - Keith@DeploymentLive.com  Aug 2018
+
+--------------------------------
+
 zpaq715.zip, Aug. 17, 2016.
 
 zpaq is a journaling archiver optimized for user-level incremental
