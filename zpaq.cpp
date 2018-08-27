@@ -1,6 +1,6 @@
 // zpaq.cpp - Journaling incremental deduplicating archiver
 
-#define ZPAQ_VERSION "7.15"
+#define ZPAQ_VERSION "7.15.KG.02"
 /*
   This software is provided as-is, with no warranty.
   I, Matt Mahoney, release this software into
@@ -1378,7 +1378,7 @@ int64_t Jidac::read_archive(const char* arc, int *errors) {
     fflush(stdout);
 
     // Test password
-    {
+    if ( password ) {
         char s[4] = { 0 };
         const int nr = in.read(s, 4);
         if (nr > 0 && memcmp(s, "7kSt", 4) && (memcmp(s, "zPQ", 3) || s[3] < 1))
@@ -3732,7 +3732,7 @@ int main() {
         errorcode = 2;
     }
     fflush(stdout);
-    fprintf(stderr, "%1.3f seconds %s\n", (mtime() - global_start) / 1000.0,
+    fprintf(errorcode > 0 ? stderr : stdout , "%1.3f seconds %s\n", (mtime() - global_start) / 1000.0,
         errorcode > 1 ? "(with errors)" :
         errorcode > 0 ? "(with warnings)" : "(all OK)");
     return errorcode;

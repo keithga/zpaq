@@ -7,8 +7,10 @@ Two major changes:
     This allows zpaq.exe to be used as a Self Extraciting Executable.
     The existing Self Extracting Executeable does not allow for some compression types.
 
-2. Removes LibDivSUFSort.c content from the libaray, 
-    so the resulting code can be used without the GPL. 
+2. Removes LibDivSUFSort.c content from the libaray,
+    so the resulting code can be used without the GPL.
+
+3. Unless there is an actual error, zpaq.exe should not write to stderr (messes up Powershell)
 
 Keith Garner - Keith@DeploymentLive.com  Aug 2018
 

@@ -4,6 +4,7 @@
   (C) 2003-2008 Yuta Mori, all rights reserved.
   It is released under the MIT license as described in the comments
   at the beginning of that section.
+  This section has been removed by default, use #Define DIVSUFSORT to re-import
 
   Some of the code for AES is from libtomcrypt 1.17 by Tom St. Denis
   and is public domain.
@@ -4655,6 +4656,8 @@ In 64 bit mode, the following additional registers are used:
 #endif
     }
 
+#ifdef DIVSUFSORT
+
     ////////////////////////// divsufsort ///////////////////////////////
 
     /*
@@ -6499,6 +6502,13 @@ In 64 bit mode, the following additional registers are used:
 
     // End divsufsort.c
 
+#else
+
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+
+#endif
+
     /////////////////////////////// add ///////////////////////////////////
 
     // Convert non-negative decimal number x to string of at least n digits
@@ -6697,10 +6707,14 @@ In 64 bit mode, the following additional registers are used:
             if (sap)
                 sa = sap;
             else {
+#if DIVSUFSORT
                 assert(ht.size() >= n);
                 assert(ht.size() > 0);
                 sa = &ht[0];
                 if (n > 0) divsufsort((const unsigned char*)in, (int*)sa, n);
+#else
+                error("Compression Type 3 not avaiable in this Public Domain version.");
+#endif
             }
             if (level < 3) {
                 assert(ht.size() >= (n*(sap == 0)) + (1u << 17 << args[0]));
